@@ -14,13 +14,13 @@ class NewsItem(Item):
 
 class ChinaSpider(CrawlSpider):
     name = 'china'
-    allowed_domains = ['http://tech.china.com']
+    allowed_domains = ['tech.china.com']
     start_urls = ['http://tech.china.com/articles/']
 
     rules = (
         Rule(LinkExtractor(allow='article\/.*\.html',
                            restrict_xpaths='//*[@id="left_side"]/div[2]/div[1]/a'), callback='parse_item'),
-        Rule(LinkExtractor(allow='article\/.*\.html', restrict_xpaths='//*[@id="pageStyle"]/a[contains(.,"下一页")]')),
+        Rule(LinkExtractor( restrict_xpaths='//*[@id="pageStyle"]/a[contains(.,"下一页")]')),
     )
 
     def parse_item(self, response):
